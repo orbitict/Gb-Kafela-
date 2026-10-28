@@ -28,7 +28,7 @@ export const Route = createFileRoute("/admin")({
 type Row = Record<string, string | number | boolean | null>;
 
 const inputClass =
-  "w-full rounded-lg border border-input bg-card px-3 py-2 text-sm outline-none focus:border-accent";
+  "w-full rounded-lg border border-input bg-card px-3.5 py-2.5 text-[15px] outline-none focus:border-accent focus:ring-2 focus:ring-ring/30";
 
 type Tab =
   | "dashboard"
@@ -218,56 +218,52 @@ function SignOutButton() {
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [mode, setMode] = useState<"in" | "up">("in");
   const [busy, setBusy] = useState(false);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setBusy(true);
-    const { error } =
-      mode === "in"
-        ? await supabase.auth.signInWithPassword({ email, password })
-        : await supabase.auth.signUp({
-            email,
-            password,
-            options: { emailRedirectTo: `${window.location.origin}/admin` },
-          });
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
     setBusy(false);
     if (error) {
-      toast.error(error.message);
+      toast.error(
+        error.message === "Invalid login credentials"
+          ? "ইমেইল বা পাসওয়ার্ড সঠিক নয়"
+          : error.message,
+      );
       return;
     }
-    toast.success(mode === "in" ? "লগইন সম্পন্ন" : "অ্যাকাউন্ট তৈরি হয়েছে");
+    toast.success("লগইন সম্পন্ন");
   }
 
   return (
-    <div className="mx-auto max-w-md px-6 py-20">
-      <div className="rounded-3xl border border-border bg-card p-8">
+    <div className="mx-auto max-w-md px-5 py-20">
+      <div className="rounded-[1.75rem] border border-border bg-card p-8 md:p-10">
         <p className="section-label">অ্যাডমিন</p>
-        <h1 className="mt-2 text-xl font-bold text-primary">
-          {mode === "in" ? "অ্যাডমিন লগইন" : "অ্যাডমিন অ্যাকাউন্ট তৈরি"}
-        </h1>
+        <h1 className="mt-3 text-[1.6rem] font-bold text-primary">অ্যাডমিন লগইন</h1>
         <form
           onSubmit={(e) => {
             void submit(e);
           }}
-          className="mt-6 grid gap-4"
+          className="mt-7 grid gap-5"
         >
           <label className="block">
-            <span className="mb-2 block text-[13px] font-semibold">ইমেইল</span>
+            <span className="mb-2 block text-[15px] font-semibold">ইমেইল</span>
             <input
               required
               type="email"
+              autoComplete="email"
               className={inputClass}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </label>
           <label className="block">
-            <span className="mb-2 block text-[13px] font-semibold">পাসওয়ার্ড</span>
+            <span className="mb-2 block text-[15px] font-semibold">পাসওয়ার্ড</span>
             <input
               required
               type="password"
+              autoComplete="current-password"
               minLength={6}
               className={inputClass}
               value={password}
@@ -277,18 +273,15 @@ function SignIn() {
           <button
             type="submit"
             disabled={busy}
-            className="cursor-pointer rounded-xl bg-primary px-6 py-3 text-sm font-bold text-primary-foreground disabled:opacity-60"
+            className="cursor-pointer rounded-full bg-primary px-6 py-3.5 text-[16px] font-bold text-primary-foreground transition-colors hover:bg-primary-deep disabled:opacity-60"
           >
-            {busy ? "অপেক্ষা করুন…" : mode === "in" ? "লগইন করুন" : "অ্যাকাউন্ট তৈরি করুন"}
+            {busy ? "অপেক্ষা করুন…" : "লগইন করুন"}
           </button>
         </form>
-        <button
-          type="button"
-          onClick={() => setMode(mode === "in" ? "up" : "in")}
-          className="mt-4 cursor-pointer text-[13px] font-semibold text-accent"
-        >
-          {mode === "in" ? "নতুন অ্যাডমিন অ্যাকাউন্ট তৈরি করুন" : "লগইন পাতায় ফিরুন"}
-        </button>
+        <p className="mt-5 text-[14px] leading-relaxed text-muted-foreground">
+          শুধু অনুমোদিত অ্যাডমিনরা লগইন করতে পারবেন। নতুন অ্যাকাউন্ট দরকার হলে প্রধান অ্যাডমিনের
+          সঙ্গে যোগাযোগ করুন।
+        </p>
       </div>
     </div>
   );

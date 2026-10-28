@@ -1,3 +1,9 @@
+@import "@fontsource/hind-siliguri/400.css";
+@import "@fontsource/hind-siliguri/500.css";
+@import "@fontsource/hind-siliguri/600.css";
+@import "@fontsource/hind-siliguri/700.css";
+@import "@fontsource/noto-serif-bengali/600.css";
+@import "@fontsource/noto-serif-bengali/700.css";
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
@@ -21,6 +27,7 @@
 
   --font-sans: var(--font-bengali);
   --font-bengali: "Hind Siliguri", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Noto Serif Bengali", "Hind Siliguri", Georgia, serif;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -63,38 +70,38 @@
 :root {
   --radius: 0.875rem;
 
-  /* cream #fbf9f4 */
-  --background: oklch(0.982 0.006 95);
-  --foreground: oklch(0.24 0.02 250);
+  /* Haram marble #f6f5f1 */
+  --background: oklch(0.971 0.005 95);
+  --foreground: oklch(0.24 0.018 165);
 
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.24 0.02 250);
+  --card-foreground: oklch(0.24 0.018 165);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.24 0.02 250);
+  --popover-foreground: oklch(0.24 0.018 165);
 
-  /* emerald #064e3b */
-  --primary: oklch(0.362 0.072 165);
+  /* Kiswah emerald #0e3b2e */
+  --primary: oklch(0.322 0.055 165);
   --primary-foreground: oklch(0.985 0.005 95);
-  --primary-deep: oklch(0.278 0.058 166);
+  --primary-deep: oklch(0.252 0.045 166);
 
-  /* gold #b38b4d */
-  --accent: oklch(0.657 0.079 78);
-  --accent-foreground: oklch(0.99 0.004 95);
-  --accent-soft: oklch(0.86 0.045 85);
+  /* burnished gold #b08d57 */
+  --accent: oklch(0.66 0.075 76);
+  --accent-foreground: oklch(0.22 0.03 165);
+  --accent-soft: oklch(0.885 0.045 85);
 
-  --secondary: oklch(0.955 0.012 95);
-  --secondary-foreground: oklch(0.362 0.072 165);
+  --secondary: oklch(0.945 0.012 110);
+  --secondary-foreground: oklch(0.322 0.055 165);
 
   --muted: oklch(0.958 0.008 100);
-  --muted-foreground: oklch(0.52 0.015 250);
+  --muted-foreground: oklch(0.47 0.015 165);
 
   --destructive: oklch(0.55 0.2 27);
   --destructive-foreground: oklch(0.985 0.005 95);
   --success: oklch(0.55 0.13 150);
   --warning: oklch(0.7 0.14 65);
 
-  --border: oklch(0.9 0.012 120);
-  --input: oklch(0.9 0.012 120);
+  --border: oklch(0.895 0.012 110);
+  --input: oklch(0.86 0.014 110);
   --ring: oklch(0.657 0.079 78);
 
   --sidebar: oklch(0.362 0.072 165);
@@ -124,31 +131,69 @@
   }
 }
 
-/* Subtle Islamic geometric texture, used on dark bands */
+/* Eight-point star (khatam) lattice, used on dark emerald bands */
 @utility pattern-geometric {
-  background-image:
-    radial-gradient(circle at 50% 50%, oklch(0.657 0.079 78 / 14%) 1px, transparent 1.6px),
-    radial-gradient(circle at 0 0, oklch(0.657 0.079 78 / 8%) 1px, transparent 1.6px);
-  background-size:
-    26px 26px,
-    26px 26px;
-  background-position:
-    0 0,
-    13px 13px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23b08d57' stroke-opacity='.09' stroke-width='1'%3E%3Cpath d='M32 14l5.3 12.7L50 32l-12.7 5.3L32 50l-5.3-12.7L14 32l12.7-5.3z'/%3E%3Cpath d='M19.3 19.3h25.4v25.4H19.3z' transform='rotate(45 32 32)'/%3E%3Cpath d='M0 0l8 8M64 0l-8 8M0 64l8-8M64 64l-8-8'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 64px 64px;
 }
 
+/* Mihrab arch: the site's signature frame for imagery */
+@utility arch {
+  border-radius: 50% 50% 1.25rem 1.25rem / 38% 38% 1.25rem 1.25rem;
+  overflow: hidden;
+}
+
+/* A thin gold arch outline offset behind an arched element */
+@utility arch-outline {
+  position: relative;
+  isolation: isolate;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -12px;
+    z-index: -1;
+    border: 1px solid oklch(0.66 0.075 76 / 55%);
+    border-radius: 50% 50% 1.5rem 1.5rem / 38% 38% 1.5rem 1.5rem;
+  }
+}
+
+/* Small gold label above a heading — no letter-spacing: tracking breaks Bengali conjuncts */
 @utility section-label {
-  font-size: 0.6875rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
   color: var(--color-accent);
-  font-weight: 700;
+  &::before {
+    content: "";
+    width: 1.75rem;
+    height: 1px;
+    background: currentColor;
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+  font-feature-settings: "kern";
+}
+
+@layer base {
+  h1,
+  h2 {
+    font-family: var(--font-display);
+    letter-spacing: 0;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
 }
 
 @keyframes rise-in {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -157,5 +202,11 @@
 }
 
 @utility animate-rise {
-  animation: rise-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: rise-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise {
+    animation: none;
+  }
 }

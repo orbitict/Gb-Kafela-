@@ -7,13 +7,12 @@ import { toBn } from "@/lib/site";
 export const Route = createFileRoute("/experience")({
   head: () => ({
     meta: [
-      { title: "হাজীদের অভিজ্ঞতা — গ্রীন বাংলা হজ কাফেলা" },
+      { title: "হাজিদের অভিজ্ঞতা — গ্রীন বাংলা হজ কাফেলা" },
       {
         name: "description",
-        content:
-          "Our Pilgrims Say — গ্রীন বাংলা হজ কাফেলার সঙ্গে হজ পালন করা হাজিদের বাস্তব অভিজ্ঞতা।",
+        content: "গ্রীন বাংলা হজ কাফেলার সঙ্গে হজ পালন করা হাজিদের বাস্তব অভিজ্ঞতা।",
       },
-      { property: "og:title", content: "হাজীদের অভিজ্ঞতা — গ্রীন বাংলা হজ কাফেলা" },
+      { property: "og:title", content: "হাজিদের অভিজ্ঞতা — গ্রীন বাংলা হজ কাফেলা" },
       { property: "og:description", content: "হাজিদের বাস্তব অভিজ্ঞতা ও মন্তব্য।" },
     ],
   }),
@@ -26,48 +25,51 @@ function Experience() {
   return (
     <>
       <PageHero
-        label="Our Pilgrims Say"
-        title="⭐ হাজীদের অভিজ্ঞতা"
+        label="হাজিদের কথা"
+        title="হাজিদের অভিজ্ঞতা"
         description="বাস্তব হাজিদের অনুমতি নিয়ে তাঁদের বক্তব্য ও ছবি প্রকাশ করা হয়েছে।"
       />
 
       <section className="bg-background">
-        <div className="mx-auto max-w-6xl px-6 py-14 md:py-20">
-          <div className="grid gap-5 md:grid-cols-2">
+        <div className="mx-auto max-w-6xl px-5 py-16 md:py-24">
+          <div className="grid gap-x-14 md:grid-cols-2">
             {testimonials?.map((t) => (
-              <figure
-                key={t.id}
-                className="rounded-2xl border border-border bg-card p-6 shadow-soft"
-              >
-                <blockquote className="text-[15px] leading-relaxed text-pretty">
-                  “{t.quote}”
+              <figure key={t.id} className="border-t border-border py-10">
+                <span aria-hidden className="font-display text-5xl leading-none text-accent">
+                  “
+                </span>
+                <blockquote className="font-display mt-2 text-[19px] leading-[1.85] text-pretty">
+                  {t.quote}
                 </blockquote>
-                <figcaption className="mt-5 flex items-center gap-3 border-t border-border pt-5">
+                <figcaption className="mt-6 flex items-center gap-4">
                   {t.photo_url ? (
                     <img
                       src={t.photo_url}
-                      alt={t.pilgrim_name}
+                      alt=""
                       loading="lazy"
-                      className="size-12 rounded-full object-cover"
+                      className="size-14 rounded-full border border-accent/40 object-cover"
                     />
                   ) : (
-                    <span className="grid size-12 place-items-center rounded-full bg-secondary font-bold text-primary/40">
-                      {t.pilgrim_name.slice(0, 1)}
+                    <span className="font-display grid size-14 place-items-center rounded-full bg-primary text-xl font-bold text-accent-soft">
+                      {t.pilgrim_name.replace(/^(মোঃ|মোছাঃ)\s*/, "").slice(0, 1)}
                     </span>
                   )}
                   <span>
-                    <span className="block text-sm font-bold text-primary">— {t.pilgrim_name}</span>
-                    <span className="text-xs text-muted-foreground">হজ {toBn(t.hajj_year)}</span>
+                    <span className="block text-[17px] font-bold text-primary">
+                      {t.pilgrim_name}
+                    </span>
+                    <span className="text-[14px] text-muted-foreground">
+                      হজ {toBn(t.hajj_year)}
+                    </span>
                   </span>
                 </figcaption>
               </figure>
             ))}
           </div>
-
-          <div className="mt-10">
+          <div className="mt-12">
             <Link
               to="/registration"
-              className="inline-flex rounded-xl bg-accent px-6 py-3 text-sm font-bold text-accent-foreground shadow-gold"
+              className="inline-flex rounded-full bg-primary px-8 py-4 text-[16px] font-bold text-primary-foreground transition-colors hover:bg-primary-deep"
             >
               আপনিও আমাদের সঙ্গে চলুন
             </Link>

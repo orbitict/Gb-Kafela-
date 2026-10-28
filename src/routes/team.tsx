@@ -30,40 +30,40 @@ function Team() {
       />
 
       <section className="bg-background">
-        <div className="mx-auto max-w-6xl px-6 py-14 md:py-20">
-          <div className="grid gap-6 md:grid-cols-3">
+        <div className="mx-auto max-w-6xl px-5 py-16 md:py-24">
+          <div className="grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
             {guides?.map((g) => (
-              <article
-                key={g.id}
-                className="rounded-2xl border border-border bg-card p-6 shadow-soft"
-              >
-                {g.photo_url ? (
-                  <img
-                    src={g.photo_url}
-                    alt={g.name}
-                    loading="lazy"
-                    className="aspect-square w-full rounded-xl object-cover"
-                  />
-                ) : (
-                  <div className="grid aspect-square w-full place-items-center rounded-xl bg-secondary text-4xl font-bold text-primary/30">
-                    {g.name.slice(0, 1)}
-                  </div>
-                )}
-                <h2 className="mt-5 font-bold text-primary">{g.name}</h2>
-                {g.bio && <p className="mt-2 text-sm text-muted-foreground">{g.bio}</p>}
+              <article key={g.id}>
+                <div className="arch aspect-[4/5] bg-secondary">
+                  {g.photo_url ? (
+                    <img
+                      src={g.photo_url}
+                      alt={g.name}
+                      loading="lazy"
+                      className="size-full object-cover"
+                    />
+                  ) : (
+                    <div className="pattern-geometric grid size-full place-items-center bg-primary">
+                      <span className="font-display text-7xl font-bold text-accent-soft/80">
+                        {g.name.replace(/^(মাওলানা|মুফতি|হাফেজ|মোঃ)\s*/, "").slice(0, 1)}
+                      </span>
+                    </div>
+                  )}
+                </div>
+                <h2 className="mt-6 text-[1.4rem] font-bold text-primary">{g.name}</h2>
+                {g.bio && <p className="mt-1.5 text-[16px] text-accent">{g.bio}</p>}
                 {g.experience && (
-                  <div className="mt-4 border-t border-border pt-4">
-                    <p className="text-[11px] font-bold tracking-widest text-accent uppercase">
-                      প্রশিক্ষণের অভিজ্ঞতা
-                    </p>
-                    <p className="mt-1 text-sm text-foreground/85">{g.experience}</p>
-                  </div>
+                  <p className="mt-4 border-t border-border pt-4 text-[16px] leading-[1.75] text-foreground/80">
+                    {g.experience}
+                  </p>
                 )}
               </article>
             ))}
           </div>
           {guides?.length === 0 && (
-            <p className="text-sm text-muted-foreground">টিম সদস্যদের তথ্য শীঘ্রই যোগ করা হবে।</p>
+            <p className="text-[16px] text-muted-foreground">
+              টিম সদস্যদের তথ্য শীঘ্রই যোগ করা হবে।
+            </p>
           )}
         </div>
       </section>

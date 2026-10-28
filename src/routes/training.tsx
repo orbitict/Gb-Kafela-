@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { PageHero, SectionHeading } from "@/components/site/PageHero";
 import { trainingSessionsQuery, trainingTopicsQuery } from "@/lib/content-queries";
-import { formatBnDate } from "@/lib/site";
+import { formatBnDate, toBn } from "@/lib/site";
 
 export const Route = createFileRoute("/training")({
   head: () => ({
@@ -11,12 +11,12 @@ export const Route = createFileRoute("/training")({
       {
         name: "description",
         content:
-          "হজের ফরজ, ওয়াজিব, তাওয়াফ, সাঈ, আরাফাত, মুযদালিফা ও মিনা — প্রশিক্ষণের বিষয়সমূহ এবং ঢাকার প্রশিক্ষণ শিডিউল।",
+          "হজের ফরজ, ওয়াজিব, তাওয়াফ, সাঈ, আরাফাত, মুযদালিফা ও মিনা — প্রশিক্ষণের বিষয়সমূহ এবং প্রশিক্ষণ ক্লাসের শিডিউল।",
       },
       { property: "og:title", content: "হজ প্রশিক্ষণ ও শিডিউল — গ্রীন বাংলা হজ কাফেলা" },
       {
         property: "og:description",
-        content: "প্রশিক্ষণের বিষয়সমূহ এবং ঢাকার প্রশিক্ষণ শিডিউল।",
+        content: "প্রশিক্ষণের বিষয়সমূহ এবং প্রশিক্ষণ ক্লাসের শিডিউল।",
       },
     ],
   }),
@@ -36,44 +36,53 @@ function Training() {
       />
 
       <section className="bg-background">
-        <div className="mx-auto max-w-6xl px-6 py-14 md:py-20">
-          <SectionHeading label="বিষয়সমূহ" title="প্রশিক্ষণে যা শেখানো হয়" />
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
-            {topics?.map((t) => (
-              <article
-                key={t.id}
-                className="rounded-2xl border border-border bg-card p-5 shadow-soft"
-              >
-                <h3 className="font-bold text-primary">{t.title}</h3>
-                {t.content && (
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t.content}</p>
-                )}
-              </article>
+        <div className="mx-auto max-w-6xl px-5 py-16 md:py-24">
+          <SectionHeading
+            label="বিষয়সমূহ"
+            title="প্রশিক্ষণে যা শেখানো হয়"
+            description="ফরজ থেকে শুরু করে সৌদি আরবের নিয়মকানুন — হজের ক্রম অনুযায়ী সাজানো।"
+          />
+          <ol className="mt-12 grid gap-x-12 md:grid-cols-2">
+            {topics?.map((t, i) => (
+              <li key={t.id} className="flex gap-5 border-t border-border py-6">
+                <span className="font-display w-8 shrink-0 text-[20px] font-bold text-accent">
+                  {toBn(i + 1)}
+                </span>
+                <div>
+                  <h3 className="font-display text-[19px] font-bold text-primary">{t.title}</h3>
+                  {t.content && (
+                    <p className="mt-2 text-[16px] leading-[1.75] text-muted-foreground">
+                      {t.content}
+                    </p>
+                  )}
+                </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
-      <section className="bg-card">
-        <div className="mx-auto max-w-6xl px-6 py-14 md:py-20">
+      <section className="pattern-geometric bg-primary text-primary-foreground">
+        <div className="mx-auto max-w-6xl px-5 py-16 md:py-24">
           <SectionHeading
             label="শিডিউল"
-            title="প্রশিক্ষণ শিডিউল"
-            description="ক্রম অনুযায়ী প্রশিক্ষণ ক্লাসের তারিখ, সময়, স্থান ও প্রশিক্ষক।"
+            title="প্রশিক্ষণ ক্লাসের তারিখ"
+            description="প্রতিটি ক্লাসের সময়, স্থান ও প্রশিক্ষক।"
+            tone="dark"
           />
-          <div className="mt-8 grid gap-4">
+          <div className="mt-12 grid gap-5">
             {sessions?.map((s) => (
               <article
                 key={s.id}
-                className="grid gap-4 rounded-2xl border border-border bg-background p-6 md:grid-cols-[auto_1fr]"
+                className="grid gap-6 rounded-[1.5rem] border border-accent/25 bg-primary-deep/50 p-6 md:grid-cols-[200px_1fr] md:items-center md:p-8"
               >
-                <div className="rounded-xl bg-primary px-5 py-4 text-center text-primary-foreground">
-                  <p className="text-[11px] tracking-widest text-accent-soft uppercase">
-                    {s.title}
+                <div>
+                  <p className="text-[14px] font-semibold text-accent-soft">{s.title}</p>
+                  <p className="font-display mt-1 text-[1.6rem] leading-snug font-bold">
+                    {formatBnDate(s.session_date)}
                   </p>
-                  <p className="mt-1 font-bold">{formatBnDate(s.session_date)}</p>
                 </div>
-                <dl className="grid gap-3 sm:grid-cols-2">
+                <dl className="grid gap-5 sm:grid-cols-2">
                   {[
                     ["সময়", s.session_time],
                     ["স্থান", s.location],
@@ -83,17 +92,17 @@ function Training() {
                     .filter(([, v]) => v)
                     .map(([k, v]) => (
                       <div key={k}>
-                        <dt className="text-[11px] font-bold tracking-widest text-accent uppercase">
-                          {k}
-                        </dt>
-                        <dd className="mt-0.5 text-sm text-foreground/85">{v}</dd>
+                        <dt className="text-[14px] text-primary-foreground/60">{k}</dt>
+                        <dd className="mt-1 text-[16px] font-medium">{v}</dd>
                       </div>
                     ))}
                 </dl>
               </article>
             ))}
             {sessions?.length === 0 && (
-              <p className="text-sm text-muted-foreground">শিডিউল শীঘ্রই প্রকাশ করা হবে।</p>
+              <p className="text-[16px] text-primary-foreground/70">
+                শিডিউল শীঘ্রই প্রকাশ করা হবে।
+              </p>
             )}
           </div>
         </div>

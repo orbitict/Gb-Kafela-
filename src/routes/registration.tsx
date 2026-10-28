@@ -85,7 +85,7 @@ function Registration() {
   });
 
   const inputClass =
-    "w-full rounded-xl border border-input bg-card px-4 py-3 text-[15px] outline-none focus:border-accent focus:ring-2 focus:ring-ring/40";
+    "w-full rounded-xl border border-input bg-background px-4 py-3.5 text-[16px] outline-none transition-colors focus:border-accent focus:bg-card focus:ring-2 focus:ring-ring/30";
 
   if (code) {
     return (
@@ -93,8 +93,8 @@ function Registration() {
         <PageHero label="নিবন্ধন" title="আপনার আবেদন জমা হয়েছে" />
         <section className="bg-background">
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
-            <p className="text-sm text-muted-foreground">আপনার রেজিস্ট্রেশন নম্বর</p>
-            <p className="mt-2 text-3xl font-bold text-primary">{code}</p>
+            <p className="text-[16px] text-muted-foreground">আপনার রেজিস্ট্রেশন নম্বর</p>
+            <p className="font-display mt-3 text-5xl font-bold text-primary">{code}</p>
             <p className="mt-6 text-[15px] leading-relaxed text-muted-foreground">
               নম্বরটি সংরক্ষণ করুন। আমাদের প্রতিনিধি ৪৮ ঘণ্টার মধ্যে আপনার সঙ্গে যোগাযোগ করে পরবর্তী
               ধাপ ও কাগজপত্র জমার নিয়ম জানাবেন।
@@ -121,7 +121,7 @@ function Registration() {
       />
 
       <section className="bg-background">
-        <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:py-20 lg:grid-cols-[1.4fr_1fr]">
+        <div className="mx-auto grid max-w-6xl gap-8 px-5 py-16 md:py-24 lg:grid-cols-[1.45fr_1fr]">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -138,13 +138,13 @@ function Registration() {
               }
               mutation.mutate();
             }}
-            className="rounded-3xl border border-border bg-card p-6 shadow-soft md:p-8"
+            className="rounded-[1.75rem] border border-border bg-card p-6 md:p-10"
           >
-            <h2 className="text-lg font-bold text-primary">আবেদনকারীর তথ্য</h2>
+            <h2 className="text-[1.5rem] font-bold text-primary">আবেদনকারীর তথ্য</h2>
 
             <div className="mt-6 grid gap-5">
               <div>
-                <label className="mb-2 block text-[13px] font-semibold">
+                <label className="mb-2 block text-[15px] font-semibold">
                   নাম (পাসপোর্ট অনুযায়ী) *
                 </label>
                 <input
@@ -156,26 +156,26 @@ function Registration() {
               </div>
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
-                  <label className="mb-2 block text-[13px] font-semibold">পিতা / স্বামীর নাম</label>
+                  <label className="mb-2 block text-[15px] font-semibold">পিতা / স্বামীর নাম</label>
                   <input className={inputClass} {...field("guardian_name")} />
                 </div>
                 <div>
-                  <label className="mb-2 block text-[13px] font-semibold">জন্মতারিখ</label>
+                  <label className="mb-2 block text-[15px] font-semibold">জন্মতারিখ</label>
                   <input type="date" className={inputClass} {...field("date_of_birth")} />
                 </div>
               </div>
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
-                  <label className="mb-2 block text-[13px] font-semibold">NID নম্বর</label>
+                  <label className="mb-2 block text-[15px] font-semibold">NID নম্বর</label>
                   <input className={inputClass} {...field("nid_number")} />
                 </div>
                 <div>
-                  <label className="mb-2 block text-[13px] font-semibold">পাসপোর্ট নম্বর</label>
+                  <label className="mb-2 block text-[15px] font-semibold">পাসপোর্ট নম্বর</label>
                   <input className={inputClass} {...field("passport_number")} />
                 </div>
               </div>
               <div>
-                <label className="mb-2 block text-[13px] font-semibold">মোবাইল নম্বর *</label>
+                <label className="mb-2 block text-[15px] font-semibold">মোবাইল নম্বর *</label>
                 <input
                   required
                   type="tel"
@@ -185,12 +185,12 @@ function Registration() {
                 />
               </div>
               <div>
-                <label className="mb-2 block text-[13px] font-semibold">ঠিকানা</label>
+                <label className="mb-2 block text-[15px] font-semibold">ঠিকানা</label>
                 <textarea rows={3} className={inputClass} {...field("address")} />
               </div>
 
               <div>
-                <label className="mb-2 block text-[13px] font-semibold">প্যাকেজ নির্বাচন *</label>
+                <label className="mb-2 block text-[15px] font-semibold">প্যাকেজ নির্বাচন *</label>
                 <div className="flex flex-wrap gap-2">
                   {packages?.map((p) => (
                     <button
@@ -198,7 +198,7 @@ function Registration() {
                       type="button"
                       onClick={() => setSelected(p.slug)}
                       className={
-                        "cursor-pointer rounded-full px-4 py-2 text-[13px] font-semibold transition-colors " +
+                        "cursor-pointer rounded-full px-5 py-2.5 text-[15px] font-semibold transition-colors " +
                         (activePackage === p.slug
                           ? "bg-primary text-primary-foreground"
                           : "border border-input bg-card text-foreground/80")
@@ -211,7 +211,7 @@ function Registration() {
               </div>
 
               <div>
-                <label className="mb-2 block text-[13px] font-semibold">অতিরিক্ত তথ্য</label>
+                <label className="mb-2 block text-[15px] font-semibold">অতিরিক্ত তথ্য</label>
                 <textarea
                   rows={3}
                   className={inputClass}
@@ -223,27 +223,29 @@ function Registration() {
               <button
                 type="submit"
                 disabled={mutation.isPending}
-                className="cursor-pointer rounded-xl bg-accent px-6 py-4 text-base font-bold text-accent-foreground shadow-gold transition-transform active:scale-[0.98] disabled:opacity-60"
+                className="cursor-pointer rounded-full bg-primary px-6 py-4 text-[17px] font-bold text-primary-foreground transition-colors hover:bg-primary-deep disabled:opacity-60"
               >
                 {mutation.isPending ? "জমা হচ্ছে…" : "রেজিস্ট্রেশন জমা দিন"}
               </button>
-              <p className="text-center text-xs text-muted-foreground">
+              <p className="text-center text-[14px] text-muted-foreground">
                 জমা দেওয়ার পর আমাদের প্রতিনিধি ৪৮ ঘণ্টার মধ্যে যোগাযোগ করবেন।
               </p>
             </div>
           </form>
 
-          <aside className="rounded-3xl border border-border bg-card p-6 shadow-soft">
-            <h2 className="text-lg font-bold text-primary">প্রয়োজনীয় ডকুমেন্টস</h2>
+          <aside className="pattern-geometric self-start rounded-[1.75rem] bg-primary p-7 text-primary-foreground md:p-9">
+            <h2 className="text-[1.4rem] font-bold text-accent-soft">প্রয়োজনীয় কাগজপত্র</h2>
             <ul className="mt-5 grid gap-4">
               {documents.map((d) => (
-                <li key={d.t} className="border-l-2 border-accent/40 pl-3">
-                  <h3 className="text-sm font-bold">{d.t}</h3>
-                  <p className="mt-1 text-[13px] leading-relaxed text-muted-foreground">{d.d}</p>
+                <li key={d.t} className="border-t border-primary-foreground/15 pt-4">
+                  <h3 className="text-[16px] font-bold">{d.t}</h3>
+                  <p className="mt-1 text-[15px] leading-relaxed text-primary-foreground/70">
+                    {d.d}
+                  </p>
                 </li>
               ))}
             </ul>
-            <p className="mt-6 rounded-xl bg-secondary p-3 text-[13px] text-secondary-foreground">
+            <p className="mt-7 rounded-xl bg-primary-deep/60 p-4 text-[15px] leading-relaxed text-accent-soft">
               কাগজপত্র সরাসরি কার্যালয়ে জমা দেওয়া যাবে। অনলাইনে কোনো ডকুমেন্ট আপলোড করতে হবে না।
             </p>
           </aside>

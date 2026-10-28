@@ -7,31 +7,32 @@ const quickLinks = [
   { to: "/training", label: "হজ প্রশিক্ষণ" },
   { to: "/journey", label: "হজ যাত্রা" },
   { to: "/gallery", label: "গ্যালারি" },
-  { to: "/contact", label: "যোগাযোগ" },
+  { to: "/team", label: "হজ গাইড" },
+  { to: "/experience", label: "হাজিদের অভিজ্ঞতা" },
 ] as const;
 
 export function Footer() {
   const { settings: site, links } = useSiteContent();
   return (
     <footer className="pattern-geometric bg-primary text-primary-foreground">
-      <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-3">
+      <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-2.5">
             <img
               src={site.logoUrl || "/logo.png"}
-              alt={site.nameEn}
-              className="size-10 rounded-full bg-white object-contain p-0.5"
+              alt=""
+              className="size-12 rounded-full border border-accent/40 bg-white object-contain p-0.5"
             />
-            <span className="font-bold">{site.nameBn}</span>
+            <span className="font-display text-lg font-bold">{site.nameBn}</span>
           </div>
-          <p className="mt-4 max-w-[34ch] text-sm leading-relaxed text-primary-foreground/70">
+          <p className="mt-4 max-w-[34ch] text-[15px] leading-[1.8] text-primary-foreground/70">
             {site.tagline}
           </p>
         </div>
 
         <div>
-          <h3 className="text-sm font-bold text-accent-soft">দ্রুত লিংক</h3>
-          <ul className="mt-4 grid gap-2.5 text-sm text-primary-foreground/80">
+          <h3 className="font-display text-[16px] font-bold text-accent-soft">দ্রুত লিংক</h3>
+          <ul className="mt-4 grid gap-3 text-[15px] text-primary-foreground/80">
             {quickLinks.map((l) => (
               <li key={l.to}>
                 <Link to={l.to} className="transition-colors hover:text-accent-soft">
@@ -43,8 +44,8 @@ export function Footer() {
         </div>
 
         <div>
-          <h3 className="text-sm font-bold text-accent-soft">যোগাযোগ</h3>
-          <ul className="mt-4 grid gap-2.5 text-sm text-primary-foreground/80">
+          <h3 className="font-display text-[16px] font-bold text-accent-soft">যোগাযোগ</h3>
+          <ul className="mt-4 grid gap-3 text-[15px] text-primary-foreground/80">
             <li>{site.address}</li>
             {site.officeHours && <li>অফিস সময়: {site.officeHours}</li>}
             <li>
@@ -82,7 +83,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-primary-foreground/10">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-6 py-5 text-[11px] text-primary-foreground/50 sm:flex-row">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-5 py-5 text-[13px] text-primary-foreground/55 sm:flex-row">
           <span>© ২০২৬ {site.nameBn} — সর্বস্বত্ব সংরক্ষিত</span>
           <Link to="/admin" className="transition-colors hover:text-accent-soft">
             অ্যাডমিন প্যানেল

@@ -32,10 +32,10 @@ function Contact() {
       />
 
       <section className="bg-background">
-        <div className="mx-auto grid max-w-6xl gap-6 px-6 py-14 md:grid-cols-2 md:py-20">
-          <div className="rounded-3xl border border-border bg-card p-6 shadow-soft md:p-8">
-            <h2 className="text-lg font-bold text-primary">যোগাযোগের তথ্য</h2>
-            <dl className="mt-6 grid gap-5">
+        <div className="mx-auto grid max-w-6xl gap-6 px-5 py-16 md:grid-cols-2 md:py-24">
+          <div className="rounded-[1.75rem] border border-border bg-card p-7 md:p-10">
+            <h2 className="text-[1.5rem] font-bold text-primary">যোগাযোগের তথ্য</h2>
+            <dl className="mt-7 grid gap-5">
               {[
                 ["কার্যালয়ের ঠিকানা", site.address],
                 ["মোবাইল", site.phone],
@@ -46,11 +46,9 @@ function Contact() {
                 ["ফেসবুক পেজ", site.facebook.replace(/^https?:\/\/(www\.)?/, "")],
                 ...(site.officeHours ? [["অফিস সময়", site.officeHours]] : []),
               ].map(([k, v]) => (
-                <div key={k} className="border-l-2 border-accent/40 pl-3">
-                  <dt className="text-[11px] font-bold tracking-widest text-accent uppercase">
-                    {k}
-                  </dt>
-                  <dd className="mt-1 text-[15px] text-foreground/85">
+                <div key={k} className="border-t border-border pt-4">
+                  <dt className="text-[14px] font-semibold text-accent">{k}</dt>
+                  <dd className="mt-1 text-[17px] text-foreground/90">
                     {k === "ফেসবুক পেজ" ? (
                       <a
                         href={site.facebook}
@@ -70,7 +68,7 @@ function Contact() {
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href={links.phone}
-                className="rounded-xl bg-primary px-6 py-3 text-sm font-bold text-primary-foreground"
+                className="rounded-full bg-primary px-7 py-3.5 text-[16px] font-bold text-primary-foreground transition-colors hover:bg-primary-deep"
               >
                 কল করুন
               </a>
@@ -78,22 +76,22 @@ function Contact() {
                 href={links.whatsapp}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-xl border border-primary/25 px-6 py-3 text-sm font-semibold text-primary"
+                className="rounded-full border border-primary/25 px-7 py-3.5 text-[16px] font-semibold text-primary transition-colors hover:bg-secondary"
               >
                 হোয়াটসঅ্যাপ করুন
               </a>
               <a
                 href={links.email}
-                className="rounded-xl border border-primary/25 px-6 py-3 text-sm font-semibold text-primary"
+                className="rounded-full border border-primary/25 px-7 py-3.5 text-[16px] font-semibold text-primary transition-colors hover:bg-secondary"
               >
                 ইমেইল করুন
               </a>
             </div>
           </div>
 
-          <div className="pattern-geometric rounded-3xl bg-primary p-6 text-primary-foreground md:p-8">
-            <h2 className="text-lg font-bold text-accent-soft">পরবর্তী ধাপ</h2>
-            <ol className="mt-6 grid gap-4 text-sm text-primary-foreground/85">
+          <div className="pattern-geometric rounded-[1.75rem] bg-primary p-7 text-primary-foreground md:p-10">
+            <h2 className="text-[1.5rem] font-bold text-accent-soft">পরবর্তী ধাপ</h2>
+            <ol className="mt-7 grid gap-5 text-[16px] leading-[1.7] text-primary-foreground/85">
               <li>১. প্যাকেজ দেখে আপনার পছন্দের প্যাকেজ নির্বাচন করুন।</li>
               <li>২. অনলাইনে প্রাথমিক নিবন্ধন ফরম পূরণ করুন।</li>
               <li>৩. আমাদের প্রতিনিধির কল পেয়ে কাগজপত্র কার্যালয়ে জমা দিন।</li>
@@ -101,7 +99,7 @@ function Contact() {
             </ol>
             <Link
               to="/registration"
-              className="mt-8 inline-flex rounded-xl bg-accent px-6 py-3 text-sm font-bold text-accent-foreground"
+              className="mt-9 inline-flex rounded-full bg-accent px-7 py-3.5 text-[16px] font-bold text-accent-foreground transition-colors hover:bg-accent-soft"
             >
               রেজিস্ট্রেশন করুন
             </Link>

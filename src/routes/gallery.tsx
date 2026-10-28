@@ -53,7 +53,7 @@ function Gallery() {
       />
 
       <section className="bg-background">
-        <div className="mx-auto max-w-6xl px-6 py-14 md:py-20">
+        <div className="mx-auto max-w-6xl px-5 py-16 md:py-24">
           <div className="flex flex-wrap gap-2">
             {[{ value: "all", label: "সবগুলো" }, ...galleryCategories].map((c) => (
               <button
@@ -61,10 +61,10 @@ function Gallery() {
                 type="button"
                 onClick={() => setFilter(c.value)}
                 className={
-                  "cursor-pointer rounded-full px-4 py-2 text-[13px] font-semibold transition-colors " +
+                  "cursor-pointer rounded-full px-5 py-2.5 text-[15px] font-semibold transition-colors " +
                   (filter === c.value
                     ? "bg-primary text-primary-foreground"
-                    : "border border-input bg-card text-foreground/75")
+                    : "border border-input bg-card text-foreground/75 hover:border-primary/40")
                 }
               >
                 {c.label}
@@ -72,19 +72,19 @@ function Gallery() {
             ))}
           </div>
 
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
             {visible.map((img) => (
-              <figure key={img.id} className="relative overflow-hidden rounded-2xl shadow-soft">
+              <figure key={img.id}>
                 <img
                   src={img.image_url}
                   alt={img.caption || "হজ যাত্রার ছবি"}
                   loading="lazy"
                   width={1024}
                   height={1024}
-                  className="aspect-square w-full object-cover"
+                  className="aspect-[4/5] w-full rounded-[1.25rem] bg-secondary object-cover"
                 />
                 {img.caption && (
-                  <figcaption className="absolute bottom-0 w-full bg-primary/75 px-4 py-2 text-[13px] font-medium text-primary-foreground">
+                  <figcaption className="mt-3 text-[15px] font-medium text-foreground/80">
                     {img.caption}
                   </figcaption>
                 )}
@@ -93,7 +93,7 @@ function Gallery() {
           </div>
 
           {visible.length === 0 && (
-            <p className="mt-8 text-sm text-muted-foreground">
+            <p className="mt-10 text-[16px] text-muted-foreground">
               এই ক্যাটাগরিতে এখনো ছবি যোগ করা হয়নি।
             </p>
           )}

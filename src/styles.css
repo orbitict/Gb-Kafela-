@@ -1,0 +1,161 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Green Bangla Hajj Kafela — design system.
+ * Islamic heritage palette: deep emerald, warm gold, soft cream.
+ * All colors are oklch semantic tokens. Never hardcode colors in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --font-sans: var(--font-bengali);
+  --font-bengali: "Hind Siliguri", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-deep: var(--primary-deep);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-soft: var(--accent-soft);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --shadow-soft: 0 1px 2px oklch(0.34 0.077 165 / 6%), 0 8px 24px -12px oklch(0.34 0.077 165 / 12%);
+  --shadow-raised: 0 18px 40px -20px oklch(0.34 0.077 165 / 26%);
+  --shadow-gold: 0 16px 36px -18px oklch(0.647 0.081 78 / 45%);
+}
+
+:root {
+  --radius: 0.875rem;
+
+  /* cream #fbf9f4 */
+  --background: oklch(0.982 0.006 95);
+  --foreground: oklch(0.24 0.02 250);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.24 0.02 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.24 0.02 250);
+
+  /* emerald #064e3b */
+  --primary: oklch(0.362 0.072 165);
+  --primary-foreground: oklch(0.985 0.005 95);
+  --primary-deep: oklch(0.278 0.058 166);
+
+  /* gold #b38b4d */
+  --accent: oklch(0.657 0.079 78);
+  --accent-foreground: oklch(0.99 0.004 95);
+  --accent-soft: oklch(0.86 0.045 85);
+
+  --secondary: oklch(0.955 0.012 95);
+  --secondary-foreground: oklch(0.362 0.072 165);
+
+  --muted: oklch(0.958 0.008 100);
+  --muted-foreground: oklch(0.52 0.015 250);
+
+  --destructive: oklch(0.55 0.2 27);
+  --destructive-foreground: oklch(0.985 0.005 95);
+  --success: oklch(0.55 0.13 150);
+  --warning: oklch(0.7 0.14 65);
+
+  --border: oklch(0.9 0.012 120);
+  --input: oklch(0.9 0.012 120);
+  --ring: oklch(0.657 0.079 78);
+
+  --sidebar: oklch(0.362 0.072 165);
+  --sidebar-foreground: oklch(0.985 0.005 95);
+  --sidebar-primary: oklch(0.657 0.079 78);
+  --sidebar-primary-foreground: oklch(0.99 0.004 95);
+  --sidebar-accent: oklch(0.32 0.065 165);
+  --sidebar-accent-foreground: oklch(0.985 0.005 95);
+  --sidebar-border: oklch(0.32 0.065 165);
+  --sidebar-ring: oklch(0.657 0.079 78);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-bengali);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: oklch(0.657 0.079 78 / 25%);
+  }
+}
+
+/* Subtle Islamic geometric texture, used on dark bands */
+@utility pattern-geometric {
+  background-image:
+    radial-gradient(circle at 50% 50%, oklch(0.657 0.079 78 / 14%) 1px, transparent 1.6px),
+    radial-gradient(circle at 0 0, oklch(0.657 0.079 78 / 8%) 1px, transparent 1.6px);
+  background-size:
+    26px 26px,
+    26px 26px;
+  background-position:
+    0 0,
+    13px 13px;
+}
+
+@utility section-label {
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-rise {
+  animation: rise-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
